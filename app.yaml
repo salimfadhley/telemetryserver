@@ -1,0 +1,24 @@
+application: sample-app
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /stylesheets
+  static_dir: stylesheets
+
+- url: /xml
+  script: xmlrpc.application
+
+- url: /.*
+  script: helloworld.application
+
+- url: (.*\.(html|css|js|gif|jpg|png|ico|swf))
+  static_files: static/\1
+  upload: static/.*
+  expiration: "1d"
+  
+libraries:
+- name: jinja2
+  version: latest
